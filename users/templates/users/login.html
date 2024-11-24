@@ -1,0 +1,21 @@
+{% extends "book/base.html" %}
+{% block start %}
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Login</button>
+        </form>
+        <div>
+            <a href="{% url 'register' %}">Don't have an account?</a>
+        </div>
+    </div>
+{% endblock %}
+

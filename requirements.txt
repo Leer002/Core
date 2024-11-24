@@ -1,0 +1,6 @@
+# Django
+Django==4.2
+
+# Photo & Image
+pillow==11.0.0
+

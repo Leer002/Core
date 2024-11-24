@@ -1,0 +1,17 @@
+<h2>Search results: </h2>
+{% if movies %}
+    {% for movie in movies %}
+        <div>
+            <img src="{{ movie.movie_image.url }}" alt="{{ movie.movie_name }}" width="200">
+            <h3>{{ movie.movie_name }}</h3>
+            <p>{{ movie.movie_description }}</p>
+            <p>{{ movie.price}}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No movie found.</p>
+{% endif %}
+<form action="{% url 'home' %}">
+    {% csrf_token %}
+    <button type="submit">Back</button>
+</form>

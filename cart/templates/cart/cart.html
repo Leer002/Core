@@ -1,0 +1,42 @@
+<!-- cart/cart.html -->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+
+<body>
+
+    <h1>Your Shopping Cart</h1>
+
+    <div>
+
+   
+
+        {% for item in cart_items %}
+        <div>
+            <p>{{ item.movie.movie_name }} ({{ item.quantity }})</p>
+            <p>Price: ${{ item.movie.price }}</p>
+            <form action="{% url 'cart-remove' item.movie.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Remove</button>
+            </form>        
+        </div>
+    {% empty %}
+        <p>Your cart is empty.</p>
+    {% endfor %}
+    
+ 
+
+    </div>
+
+    <p>Total Price: {{ total_price }}t</p>
+
+    <a href="{% url 'home' %}">Continue Shopping</a>
+
+</body>
+
+</html>

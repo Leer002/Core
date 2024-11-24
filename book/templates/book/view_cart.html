@@ -1,0 +1,24 @@
+<h1>سبد خرید</h1>
+<table>
+    <tr>
+        <th>عنوان فیلم</th>
+        <th>قیمت</th>
+        <th>تعداد</th>
+        <th>عملیات</th>
+    </tr>
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item.movie.title }}</td>
+        <td>{{ item.movie.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>
+            <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">حذف</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>جمع کل: {{ total_price }}</h2>
