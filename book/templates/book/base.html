@@ -17,6 +17,7 @@
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>
             {% endif %}
+            <a href={% url 'infos' %}>cart</a>
         </div>
         <div>
             <p>Die Anzahl in deinem Cart: {{total_quantity}}</p>

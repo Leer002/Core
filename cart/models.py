@@ -12,5 +12,9 @@ class CartItem(models.Model):
     def __str__(self):
         return f'{self.quantity} x {self.movie.movie_name}'
     
-    def __len__(self):
-        return self.quantity
+class UserInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=20)
+
+

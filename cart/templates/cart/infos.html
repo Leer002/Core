@@ -1,0 +1,13 @@
+<h1>Status:</h1>
+{% if status %}
+    <p>{{ status }}</p>
+{% endif %}
+
+{% if name %}
+    <h2>Your information:</h2>
+    <p>name: {{ name }}</p>
+    <p>phone: {{ phone }}</p>
+    <p>address: {{ address }}</p>
+{% endif %}
+
+<a href="{% url 'home' %}">Home page</a>
