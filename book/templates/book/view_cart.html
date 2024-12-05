@@ -1,10 +1,10 @@
-<h1>سبد خرید</h1>
+<h1> Cart: </h1>
 <table>
     <tr>
-        <th>عنوان فیلم</th>
-        <th>قیمت</th>
-        <th>تعداد</th>
-        <th>عملیات</th>
+        <th>title:</th>
+        <th>price:</th>
+        <th>quantity:</th>
+        <th>remove: </th>
     </tr>
     {% for item in cart_items %}
     <tr>
@@ -14,11 +14,11 @@
         <td>
             <form action="{% url 'remove_from_cart' item.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit">حذف</button>
+                <button type="submit">remove</button>
             </form>
         </td>
     </tr>
     {% endfor %}
 </table>
 
-<h2>جمع کل: {{ total_price }}</h2>
+<h2> Total price: {{ total_price }}</h2>
