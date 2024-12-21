@@ -1,17 +1,28 @@
-
-<h2>Search results for: {{ query }}</h2>
-{% if movies %}
-    {% for movie in movies %}
-        <div>
-            <img src="{{ movie.movie_image.url }}" alt="{{ movie.movie_name }}" width="200">
-            <h3>{{ movie.movie_name }}</h3>
-            <p>{{ movie.movie_description }}</p>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>No movie found.</p>
-{% endif %}
-<form action="{% url 'home' %}">
-    {% csrf_token %}
-    <button type="submit">Back</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{movie.movie_name}}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Search results for: {{ query }}</h1>
+    {% if movies %}
+        {% for movie in movies %}
+            <div>
+                <img src="{{ movie.movie_image.url }}" alt="{{ movie.movie_name }}" width="200">
+                <h3>{{ movie.movie_name }}</h3>
+                <p>{{ movie.movie_description }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No movie found.</p>
+    {% endif %}
+    <form action="{% url 'home' %}">
+        {% csrf_token %}
+        <button type="submit">Back</button>
+    </form>
+</body>
+</html>

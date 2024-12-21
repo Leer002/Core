@@ -1,11 +1,11 @@
-<!-- cart/cart.html -->
-
+{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
    
 
         {% for item in cart_items %}
-        <div>
+        <div class="body">
             <p>{{ item.movie.movie_name }} ({{ item.quantity }})</p>
             <p>Price: ${{ item.movie.price }}</p>
             <form action="{% url 'cart-remove' item.movie.id %}" method="post">
@@ -37,9 +37,8 @@
 
     <a href="{% url 'home' %}">Continue Shopping</a>
     
-    <div>
-        <a href="{% url 'checkout' %}">Ckeckout</a>
-    </div>
+
+    <a href="{% url 'checkout' %}">Ckeckout</a>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.views import View
+from django.contrib import messages
 
 from .models import UserInfo
 
@@ -11,18 +12,18 @@ class CartItemView(View):
         cart_items = request.session.get('cart', {})
         total_price = 0
         items_list = []
-        total_quantity = sum(cart_items.values())  
+        total_quantity = sum(cart_items.values())
 
         for movie_id, quantity in cart_items.items():
             movie = get_object_or_404(Movie, id=movie_id)
             total_price += movie.price * quantity
             items_list.append({'movie': movie, 'quantity': quantity})
+            
 
         
         request.session['total_quantity'] = total_quantity
         request.session['cart'] = cart_items 
         return render(request, "cart/cart.html", {"cart_items": items_list, "total_price": total_price, "total_quantity": total_quantity})
-
 
 
 class CartItemAddView(View):
@@ -36,7 +37,6 @@ class CartItemAddView(View):
         
         request.session['cart'] = cart 
         return redirect("cart-view")
-
 
 class CartItemRemoveView(View):
     def post(self, request, movie_id):
@@ -53,7 +53,6 @@ class CartItemRemoveView(View):
         
         request.session['cart'] = cart  
         return redirect("cart-view")
-
 
 class CheckOut(View):
     def get(self, request):
@@ -74,13 +73,13 @@ class CheckOut(View):
         phone_number = request.POST.get("phone_number")
         cart = request.session.get("cart")
 
-       
         user_instance = request.user
 
         user_info, created = UserInfo.objects.get_or_create(user=user_instance)
         user_info.address = address
         user_info.phone_number = phone_number
         user_info.save()
+        
 
         return render(request, "cart/checkout.html", {
             "user": user,
@@ -89,10 +88,14 @@ class CheckOut(View):
             "cart": cart,
             "status": "Successful"
         })
-      
+
 
 class InfosView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            messages.error(request, "You must login first!")
+            return redirect("login")
+
         user_info = UserInfo.objects.filter(user=request.user).first()
         
         name = request.user.username 
@@ -107,6 +110,9 @@ class InfosView(View):
         })
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            messages.error(request, "You must login first!")
+            return redirect("login")
         name = request.POST.get('name') 
         phone = request.POST.get('phone')
         address = request.POST.get('address')
@@ -119,10 +125,13 @@ class InfosView(View):
         user_info.address = address
         user_info.save()
 
+        request.session['total_quantity'] = 0
+        del request.session["cart"]
+        
         return render(request, "cart/infos.html", {
             "name": name,  
             "phone": phone,
             "address": address,
             "status": "Successful"
-        })
-
+        })  
+    

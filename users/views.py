@@ -34,6 +34,7 @@ class UserRegisterView(View):
         return render(request, "users/register.html", context={"form":form})
 
 
+
 class UserLoginView(View):
     def get(self, request):
         form = AuthenticationForm()
@@ -58,7 +59,8 @@ class UserLoginView(View):
             messages.error(request, "Something went wrong")
             return redirect("home")
 
+
 class UserLogoutView(View):
     def get(self, request):
         logout(request)
-        return render(request, "book/base.html")
+        return redirect("home")

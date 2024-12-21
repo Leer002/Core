@@ -1,4 +1,14 @@
-{% block start %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Login</h1>
     <div>
         {% if messages %}
             {% for message in messages %}
@@ -7,14 +17,16 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <form action="{% url 'login' %}" method="POST">
+        <form action="{% url 'login' %}" method="POST" id="login-form">
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Login</button>
         </form>
-        <div>
-            <a href="{% url 'register' %}">Don't have an account?</a>
-        </div>
+        
+        <div class="login-a"><a href="{% url 'register' %}">Don't have an account?</a>
+        <a href="{% url 'home' %}">Home</a><div/>
     </div>
-{% endblock %}
+</body>
+</html>
+
 

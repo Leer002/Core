@@ -1,29 +1,38 @@
-{% block start %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
     <h1>Register</h1>
-    <form action="{% url 'register' %}", method="post">
+    <form action="{% url 'register' %}", method="post" class="register-form">
         {% csrf_token %}
         <div>
-            <label for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+            <label for="{{form.username.id_for_label}}">{{form.username.label}}: </label>
             {{form.username}}
             {% if form.username.error %}
                 <div>{{form.username.error}}</div>
             {% endif %}
         </div>
         <div>
-            <label for="{{form.password1.is_for_label}}">{{form.password1.label}} </label>
+            <label for="{{form.password1.is_for_label}}">{{form.password1.label}}: </label>
             {{form.password1}} <br/>
-            <label for="{{form.password2.id_for_lable}}">{{form.password2.label}}</label>
+            <label for="{{form.password2.id_for_lable}}">{{form.password2.label}}: </label>
             {{form.password2}}
             {% if form.password1.errors %}
                 <div>{{ form.password1.errors }}</div>
             {% endif %}
-            <div>
-                <label for="{{form.email.id_for_label}}">{{form.email.label}}</label>
-                {{form.email}}
-                {% if form.email.errors %}
-                   <div>{{form.email.errors}}</div>
-                {% endif %}
-            </div>
+        <div>
+            <label for="{{form.email.id_for_label}}">{{form.email.label}}: </label>
+            {{form.email}}
+            {% if form.email.errors %}
+            <div>{{form.email.errors}}</div>
+            {% endif %}
+        </div>
             {% if form.errors %}
                 <div>
                     <ul>
@@ -40,6 +49,7 @@
             {% endif %}
             <button type="submit">register</button>
         </div>
-    </form>
-{% endblock %}
-
+    </form></br>
+    <a href="{% url "home" %}">Home</a>
+</body>
+</html>

@@ -1,13 +1,29 @@
-<h1>{{movie.movie_name}}</h1>
-<img src="{{movie.movie_image.url}}" alt="Photo" width="200px"/>
-<p>Description: {{movie.movie_description}}</p>
-<p>Price: {{movie.price}}T</p>
-<p>{{ movie.emenities.count|pluralize:"Emenity, Emenities" }}:
-    {% for emenity in movie.emenities.all %}
-        {{ emenity }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p> 
-<form action="{% url 'home' %}">
-    {% csrf_token %}
-    <button type="submit">Back</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{movie.movie_name}}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <center>
+        <div id="detail">
+            <h1>{{movie.movie_name}}</h1>
+            <img src="{{movie.movie_image.url}}" alt="Photo" width="200px"/>
+            <p>Description: {{movie.movie_description}}</p>
+            <p>Price: {{movie.price}}T</p>
+            <p>{{ movie.emenities.count|pluralize:"Emenity, Emenities" }}:
+                {% for emenity in movie.emenities.all %}
+                    {{ emenity }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p> 
+            <form action="{% url 'home' %}">
+                {% csrf_token %}
+                <button type="submit">Back</button>
+            </form>
+        </div>
+    </center>
+</body>
+</html>

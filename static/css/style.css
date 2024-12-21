@@ -1,0 +1,188 @@
+a {
+    text-decoration: none;
+    border: 3px solid cadetblue;
+    border-radius: 10px;
+    padding: 5px;
+    transition: background-color .3s ease-in-out;
+    color: darkslateblue;
+}
+
+a:hover {
+    background-color: lightblue;
+}
+
+img {
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#ausnahme {
+    border-bottom: 3px dashed darkred;
+    transition: border-radius .4s ease-in-out;
+}
+
+#ausnahme:hover {
+    border-radius: 10px;
+}
+
+input {
+    border-radius: 5px;
+    border: none;
+    border-bottom: 3px solid cadetblue;
+    transition: background-color .3s ease-in-out;
+    outline: none;
+}
+
+input:focus {
+    background-color: lightgray;
+}
+
+button {
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+h1, h2 {
+    text-shadow: 2px 3px 5px lightcoral;
+    margin: 30px auto;
+}
+
+#form {
+    margin-bottom: 20px;
+}
+
+#detail {
+    font-size: 25px;
+
+}
+
+#detail img {
+    width: 300px;
+}
+
+#detail button {
+    width: 50px;
+    padding: 4px;
+}
+
+.body {
+    font-size: 25px;
+}
+
+#info {
+    font-size: 25px;
+    justify-self: center;
+}
+
+.p {
+    border: 3px solid crimson;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 5px;
+    transition: background-color .3s ease-in-out;
+}
+
+.p:hover {
+    background-color: pink;
+}
+
+.a-checkout {
+    font-size: 16px;
+    width: fit-content;
+}
+
+#form-checkout {
+    display: inline;
+}
+
+#form-checkout button, #info a {
+    margin-top: 15px;
+    padding: 3px;
+}
+
+
+.status p {
+    font-size: 20px;
+}
+
+.status h1 {
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.status p:nth-of-type(1) {
+    margin-top: 0px;
+    display: inline;
+    margin-left: 5px;
+}
+
+.status h2 {
+    margin-bottom: 8px;
+}
+
+.status h2 + p{
+    margin-top: 2px;
+}
+
+.status a:hover, .status p:hover {
+    text-shadow: 2px 3px 5px cornflowerblue;
+}
+
+#login-form {
+    display: inline;
+    font-size: larger;
+}
+
+#login-form, #login-form + a {
+    margin-top: 10px;
+}
+
+.register-form {
+    font-size: larger;
+}
+
+.register-form label {
+    display: block;
+    margin-top: 15px;
+    width: fit-content;
+}
+
+.register-form input {
+    margin-top: 0px;
+}
+
+.register-form button {
+    margin-top: 11px;
+}
+
+.register-form ~ a {
+    padding: 1px 6px;
+    border-radius: 5px;
+}
+
+div[role="alert"] {
+    border: 3px solid red;
+    width: fit-content;
+    padding: 4px;
+    outline: 2px solid black;
+    background-color: lightpink;
+    transition: background-color .3s ease-out;
+}
+
+div[role="alert"]:hover {
+    background-color: lightcyan;
+}
+
+.login-a {
+    margin-top: 30px;
+}

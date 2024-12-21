@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <nav>
+    <nav id="container">
         <div>
             <a href="{% url 'home' %}">Home</a>
             {% if user.is_authenticated %}
@@ -17,41 +19,41 @@
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>
             {% endif %}
-            <a href={% url 'infos' %}>cart</a>
+            <a href={% url 'cart-view' %}>cart</a>
+        </div>
+        <div id="ausnahme">
+            Die Anzahl in deinem Cart: {{total_quantity}}
         </div>
         <div>
-            <p>Die Anzahl in deinem Cart: {{total_quantity}}</p>
+            <form action="{% url 'search' %}" method="GET">
+                <input type="text" name="query" placeholder="Movie search" required />
+                <button type="submit">search</button>
+            </form>        
+        </div>
+        <div>
+            <form action="{% url 'sort' %}" method="GET">
+                <input type="number" name="price" placeholder="Movie price" required />
+                <button type="submit">sort</button>
+            </form>
         </div>
     </nav>
-    <div>
-        <form action="{% url 'search' %}" method="GET">
-            <input type="text" name="query" placeholder="Movie search" required />
-            <button type="submit">search</button>
-        </form>        
-    </div>
-    <div>
-        <form action="{% url 'sort' %}" method="GET">
-            <input type="number" name="price" placeholder="Movie price" required />
-            <button type="submit">sort</button>
-        </form>
-    </div>
     <h1>The list of movies: </h1>
     <div>
         {% if movies_objs %}
             {% for movie in movies_objs %}
                 <div>
-                    <img src="{{movie.movie_image.url}}" alt="Photo" width="200px"/>
-                    <a href="{% url 'detail' movie.id %}"><p>Name: {{movie.movie_name}}</p></a>
+                    <div><img src="{{movie.movie_image.url}}" alt="Photo" width="200px"/></div>
+                    <div><a href="{% url 'detail' movie.id %}">Name: {{movie.movie_name}}</a></div>
                     <p>Description: {{movie.movie_description}}</p>
                     <p>Price: {{movie.price}}T</p>
                     <p>{{ movie.emenities.count|pluralize:"Emenity, Emenities" }}:
                         {% for emenity in movie.emenities.all %}
-                            {{ emenity }}{% if not forloop.last %}, {% endif %}
+                            {{emenity}}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </p> 
                     <form action="{% url 'cart-add' movie.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Book</button>
+                        <button type="submit" id="form">Book</button>
                     </form>
                 </div>
             {% endfor %}
@@ -61,3 +63,4 @@
 </body>
 
 </html>
+

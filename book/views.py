@@ -3,17 +3,18 @@ from django.contrib import messages
 from django.views import View
 
 
-from .models import Movie, Emenitites
+from .models import Movie, Emenities
 
 
 class APIMoviesView(View):
     def get(self, request):
         movies_objs = Movie.objects.all()
-        emenities = Emenitites.objects.all()
+        emenities = Emenities.objects.all()
         total_quantity = request.session.get('total_quantity', 0)
         context = {"movies_objs":movies_objs, "emenities": emenities, "total_quantity": total_quantity, "user":request.user}
         return render(request, "book/base.html", context=context)
-    
+
+
 class Search_movie(View):
     def get(self, request):
         query = request.GET.get("query")
@@ -22,7 +23,7 @@ class Search_movie(View):
         else:
             movies = Movie.objects.all()
         return render(request, 'book/search.html', context={"movies": movies, "query":query})
-        
+
 
 class SortByPrice(View):
     def get(self, request):
@@ -43,3 +44,4 @@ class DetailView(View):
             messages.error(request, "Not found")
             return redirect("home")
         return render(request, "book/detail.html", {"movie":movie})
+

@@ -1,24 +1,36 @@
-<h1> Cart: </h1>
-<table>
-    <tr>
-        <th>title:</th>
-        <th>price:</th>
-        <th>quantity:</th>
-        <th>remove: </th>
-    </tr>
-    {% for item in cart_items %}
-    <tr>
-        <td>{{ item.movie.title }}</td>
-        <td>{{ item.movie.price }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>
-            <form action="{% url 'remove_from_cart' item.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit">remove</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1> Cart: </h1>
+    <table>
+        <tr>
+            <th>title:</th>
+            <th>price:</th>
+            <th>quantity:</th>
+            <th>remove: </th>
+        </tr>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.movie.title }}</td>
+            <td>{{ item.movie.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+                <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
-<h2> Total price: {{ total_price }}</h2>
+    <h2> Total price: {{ total_price }}</h2>
+</body>
+</html>
